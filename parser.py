@@ -19,7 +19,7 @@ url = news[0]['link']  # get article by news number (starts from 0)
 
 # enter where to find data on site
 data = parse.grub(url, cont = 'div.b-text p', 
-                    img = 'h1.b-topic__title', title = 'div.b-topic__title-image img.g-picture')
+                    img = 'div.b-topic__title-image img.g-picture', title = 'h1.b-topic__title')
 print(data)
 
 
@@ -61,4 +61,19 @@ url = news[0]['link']
 data = parse.grub(url, cont = 'div.js-mediator-article p', 
                         img = 'div.b-material-incut-m-image img',
                         title = 'div.b-material-before-body__data h1')
+print(data)
+
+
+
+# Create new rss parser for life
+
+parse = Parser("https://life.ru/xml/feed.xml") 
+news = parse.news(1)  
+print(news)
+
+url = news[0]['link'] 
+
+data = parse.grub(url, cont = 'div.content-note p', 
+                        img = 'figure.post-page-image img',
+                        title = 'header.post-page-header h1')
 print(data)

@@ -36,7 +36,10 @@ class Lenta():
         for div in tree.cssselect('div.b-text p'):
             lentaContent.append(div.text_content())
         lentaTitle = tree.cssselect('h1.b-topic__title')[0].text
-        lentaImage = tree.cssselect('div.b-topic__title-image img.g-picture')[0].get("src")
+        try:
+            lentaImage = tree.cssselect('div.b-topic__title-image img.g-picture')[0].get("src")
+        except:
+            lentaImage = 'None'
 
         lentaArticle = {"title": lentaTitle,
                     "image": lentaImage,
@@ -78,12 +81,13 @@ class Parser():
             for div in tree.cssselect(cont):
                 Content.append(div.text_content())
         else: Content.append(cont)    
-
-        if img != "None":
-            
-            Image = tree.cssselect(img)[0].get("src")
-        else: Image = img      
-
+        
+        try:
+            if img != "None":    
+                Image = tree.cssselect(img)[0].get("src")
+            else: Image = img 
+        except:     
+            Image = "None"  
         if title != "None":
             Title = tree.cssselect(title)[0].text
         else: Title = title 
